@@ -1,0 +1,99 @@
+@baseUrl = https://localhost:5000
+
+# Create a new document
+POST {{baseUrl}}/documents
+Content-Type: application/json
+
+{
+    "id": "doc1",
+    "tags": ["important", ".net"],
+    "data": {
+        "title": "Test Document",
+        "content": "This is a test document",
+        "version": 1
+    }
+}
+
+### Get document in JSON format (default)
+GET {{baseUrl}}/documents/doc1
+
+### Get document in XML format
+GET {{baseUrl}}/documents/doc1
+Accept: application/xml
+
+### Get document in MessagePack format
+GET {{baseUrl}}/documents/doc1
+Accept: application/x-msgpack
+
+### Update document
+PUT {{baseUrl}}/documents/doc1
+Content-Type: application/json
+
+{
+    "id": "doc1",
+    "tags": ["important", ".net", "updated"],
+    "data": {
+        "title": "Updated Test Document",
+        "content": "This is an updated test document",
+        "version": 2
+    }
+}
+
+### Delete document
+DELETE {{baseUrl}}/documents/doc1
+
+### Create another document with different data structure
+POST {{baseUrl}}/documents
+Content-Type: application/json
+
+{
+    "id": "doc2",
+    "tags": ["api", "test"],
+    "data": {
+        "name": "API Test",
+        "status": "active",
+        "metadata": {
+            "created": "2024-01-01",
+            "author": "test-user",
+            "version": 1.1,
+            "settings": {
+                "enabled": true,
+                "maxSize": 1000,
+                "features": [
+                    { "name": "feature1", "enabled": true },
+                    { "name": "feature2", "enabled": false }
+                ]
+            }
+        },
+        "content": {
+            "sections": [
+                {
+                    "id": 1,
+                    "title": "Section 1",
+                    "subsections": [
+                        { "id": 1.1, "text": "Subsection 1.1" },
+                        { "id": 1.2, "text": "Subsection 1.2" }
+                    ]
+                }
+            ]
+        }
+    }
+}
+
+### Get non-existent document (should return 404)
+GET {{baseUrl}}/documents/non-existent
+
+### Update non-existent document (should return 404)
+PUT {{baseUrl}}/documents/non-existent
+Content-Type: application/json
+
+{
+    "id": "non-existent",
+    "tags": ["test"],
+    "data": {
+        "error": "should not work"
+    }
+}
+
+### Delete non-existent document (should return 404)
+DELETE {{baseUrl}}/documents/non-existent 
