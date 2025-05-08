@@ -63,7 +63,7 @@ dotnet run --project Coderama.API
 
 #### Create Document
 ```http
-POST /api/documents
+POST /documents
 Content-Type: application/json
 
 {
@@ -81,13 +81,13 @@ Content-Type: application/json
 
 #### Get Document
 ```http
-GET /api/documents/{id}
+GET /documents/{id}
 Accept: application/json
 ```
 
 #### Update Document
 ```http
-PUT /api/documents/{id}
+PUT /documents/{id}
 Content-Type: application/json
 
 {
@@ -106,7 +106,7 @@ Content-Type: application/json
 
 #### Delete Document
 ```http
-DELETE /api/documents/{id}
+DELETE /documents/{id}
 ```
 
 ### Content Negotiation
